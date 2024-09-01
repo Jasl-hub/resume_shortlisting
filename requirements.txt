@@ -1,0 +1,3 @@
+pdfplumber
+PyPDF2
+spacy
