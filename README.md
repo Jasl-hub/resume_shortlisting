@@ -1,63 +1,128 @@
-# Resume Shortlisting
-This AI-powered project automates resume shortlisting by scoring resumes based on experience, skills, and education. It extracts experience using advanced regex, matches job description keywords, and supports formats like PDF. Optimized for fast processing, it streamlines recruitment by highlighting the top 5 candidates.
+# 🤖 Resume Shortlisting using AI & Keyword Matching
 
-## Resume Shortlisting Automation with AI
-
-This project is designed to automate the process of resume shortlisting by using AI-driven methods to evaluate and score resumes based on relevant experience, skills, and educational qualifications. It aims to streamline the recruitment process, making it more efficient and accurate by highlighting the most suitable candidates for a job description.
-
-### Key Features
-
-- **Experience Extraction**: 
-  - The system employs advanced regular expressions (regex) to extract and calculate years of experience from various formats. It handles explicit experience mentions like "10+ years", and date ranges such as "2020 May to 2023 Aug," converting these into a numerical value contributing to the overall resume score.
-  
-- **Keyword Matching**:
-  - The system efficiently matches keywords from job descriptions to the content of resumes. It identifies and scores relevant skills, certifications, and educational qualifications, prioritising candidates with the most appropriate backgrounds.
-  
-- **Scoring System**:
-  - The resume scoring system is designed to be flexible and comprehensive. It assigns scores based on years of experience, relevant skills, and educational qualifications. This scoring system can be customized to fit the specific needs of different job roles or industries.
-  
-- **Batch Processing**:
-  - The tool is optimized to process large resumes quickly and efficiently. This is particularly useful for large-scale recruitment drives where hundreds or thousands of resumes must be screened quickly.
-  
-- **Streamlined Recruitment**:
-  - By automating the candidate evaluation process, this project significantly reduces the time and effort required for manual resume screening. It ensures that only the most qualified individuals are highlighted for further consideration, making the recruitment process more effective.
-
-### Installation and Setup
-
-1. **Clone the Repository**:  
-   ```
-   git clone https://github.com/Jasl-hub/resume-shortlisting-ai.git
-   
-   ```
-
-2. **Install Dependencies**:  
-
-   ```
-   pip install -r requirements.txt
-   ```
-
-3. **Run the Script**:  
-   You can start processing resumes by running the main script:
-   ```
-   python resume_shortlisting.py
-   ```
-
-4. **Configure Scoring System**:  
-   Customize the scoring system by modifying the `data_map` in the script, where you can set the weight for different experience ranges, skills, and educational qualifications.
-
-### Usage
-
-- **Dataset**: Provide resumes in PDF format. The dataset has been taken from: https://www.kaggle.com/datasets/sauravsolanki/hire-a-perfect-machine-learning-engineer
-- **Output**: The system will generate a list of 5 candidates with scores, highlighting those who best match the job requirements.
-
-### Customization
-
-- **Regex Customization**: The regex patterns used for extracting years of experience and other qualifications can be modified to suit specific requirements or different formats that might be encountered.
-  
-- **Keyword Dictionary**: The system uses a keyword dictionary that can be updated to include industry-specific terms, certifications, and skills.
-
-### Contributing
-
-Contributions to improve the project are welcome! Please fork the repository, create a new branch, and submit a pull request.
+This project automates the resume shortlisting process by extracting keywords from job descriptions, parsing resumes, calculating years of experience, and scoring resumes based on relevance. It is designed to assist recruiters in filtering the most suitable candidates efficiently.
 
 ---
+
+## 📁 Project Structure
+
+```
+resume_shortlisting/
+├── 1_resume_shortlist_wo_ML.py                       # Rule-based resume shortlisting using keyword matching
+├── 2_resumeparsing_without_bert_(spacy_+_tf_idf).py  # Resume parsing and scoring using SpaCy and TF-IDF
+├── 3_bert_resume_shortlisting_complete.py            # Resume shortlisting using BERT embeddings
+├── 4_unified_evaluation_framework_bert_&_tfidf_&_hybrid.py  # Unified scoring and comparison framework for BERT, TF-IDF, and Hybrid models
+├── tfidf_vs_bert.png                                 # Visualization comparing TF-IDF vs BERT performance
+├── tfidf_vs_bert_vs_hybrid.png                       # Visualization comparing all three approaches
+├── HIREAIML_sample.zip                               # Sample input data (job descriptions and resumes)
+├── requirements.txt                                  # Python dependencies
+├── README.md                                         # Project overview and instructions
+```
+
+
+
+---
+
+## 🚀 Features
+
+- 🔍 Keyword Extraction from job descriptions (skills, education, certifications, experience)
+- 📄 Resume Parsing for PDFs using PyPDF2
+- ⏳ Experience Calculation from natural language and date ranges
+- 🧠 Resume Scoring based on:
+  - Matched skills
+  - Educational qualifications
+  - Calculated years of experience
+- 🏆 Final Shortlist Generation with visual score summary
+
+---
+
+## 🛠️ How to Use
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Jasl-hub/resume_shortlisting.git
+cd resume_shortlisting
+```
+
+### 2. Install the required packages
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Prepare your input data
+
+- Place **Job Description files** in a folder named `job_descriptions/`
+- Place **Resumes (PDF format)** in a folder named `resumes/`
+
+### 4. 🧠 Approach Overview
+This project follows a step-by-step evolution from simple rule-based logic to advanced ML-based resume shortlisting methods:
+
+🔹 a. Rule-Based Shortlisting (No ML)
+File: 1_resume_shortlist_wo_ML.py
+
+Matches resumes with job descriptions using extracted keywords (skills, education, experience).
+
+Simple, fast, and interpretable.
+
+Limitation: Cannot understand context or synonyms.
+
+🔹 b. TF-IDF + SpaCy Matching
+File: 2_resumeparsing_without_bert_(spacy_+_tf_idf).py
+
+Uses TF-IDF and cosine similarity to rank resumes based on keyword importance.
+
+Better than raw keyword matching.
+
+Limitation: Still lacks deep semantic understanding.
+
+🔹 c. BERT-Based Shortlisting
+File: 3_bert_resume_shortlisting_complete.py
+
+Leverages BERT embeddings to compare resumes and JDs semantically.
+
+Captures context and meaning, even when wording differs.
+
+Limitation: Slower and resource-intensive.
+
+🔹 d. Unified Evaluation Framework (TF-IDF + BERT + Hybrid)
+File: 4_unified_evaluation_framework_bert_&_tfidf_&_hybrid.py
+Visuals: tfidf_vs_bert.png, tfidf_vs_bert_vs_hybrid.png
+
+Compares all three methods and introduces a hybrid approach.
+
+Balances performance and accuracy.
+
+Useful for adapting to different hiring needs.
+
+✅ Use rule-based for quick filtering, TF-IDF for a balance, and BERT/hybrid for precision matching.
+
+
+
+---
+
+## 📊 Output
+
+The script will generate a file called `tfidf_vs_bert_vs_hybrid.png` or `tfidf_vs_bert.png`, displaying the shortlisted candidates along with their scores.
+
+---
+
+## 📌 Future Improvements
+
+- 🖥 Add GUI or Streamlit-based interface
+- 📘 Include support for DOCX resumes and multilingual documents
+- 🚀 Deploy the entire pipeline as a web application using Streamlit or Flask for easy recruiter interaction and resume upload.
+
+---
+
+## 📄 License
+
+This project is open-sourced under the **MIT License**.
+
+---
+
+## 🤝 Contributing
+
+Contributions, suggestions, and improvements are welcome!  
+Feel free to open issues or submit pull requests.
